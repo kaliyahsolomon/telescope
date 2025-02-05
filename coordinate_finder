@@ -27,7 +27,7 @@ def get_star_coord_list(target, time_range, observer):
     star = FixedTarget.from_name(target)
     star_altaz =[]
     for time in time_range:
-        star_altaz.append(observer.altaz(time, target))
+        star_altaz.append(observer.altaz(time, star))
     return star_altaz 
 
 def get_planet_coord_list(target, time_range, observer):
@@ -45,9 +45,9 @@ time_range = get_time_list()
 alt_az = []
 
 look_at = input("Do you want to look at a stars (stars, nebulas, galaxies, and clusters) or planetary objects (planets and moons)? ")
-if (look_at.lower() == "star"):
+if (look_at.lower() == "star" or look_at.lower() == "stars"):
     target = input("What star would you like to look at? ")
-    alt_az = get_star_coord_list(target, time_range, observer)
+    alt_az = get_star_coord_list("Polaris", time_range, observer)
 else:
     target = input("What planetary object would you like to look at? ")
     alt_az = get_planet_coord_list(target, time_range, observer)
