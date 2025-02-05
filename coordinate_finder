@@ -1,14 +1,10 @@
 # telscope pointing code
-from astropy.coordinates import SkyCoord, AltAz, EarthLocation
-from astropy.time import Time
 from astroplan import Observer, FixedTarget
-import astropy.units as u
-from datetime import datetime, timedelta, timezone
+from datetime import timedelta
 from astroplan import Observer
 from astropy.coordinates import get_body
 from astropy.time import Time
 import astropy.units as u
-from datetime import datetime
 import pytz
 
 
