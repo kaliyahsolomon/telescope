@@ -1,7 +1,6 @@
 # telscope pointing code
 from astroplan import Observer, FixedTarget
 from datetime import timedelta
-from astroplan import Observer
 from astropy.coordinates import get_body
 from astropy.time import Time
 import astropy.units as u
@@ -47,7 +46,7 @@ alt_az = []
 look_at = input("Do you want to look at a stars (stars, nebulas, galaxies, and clusters) or planetary objects (planets and moons)? ")
 if (look_at.lower() == "star" or look_at.lower() == "stars"):
     target = input("What star would you like to look at? ")
-    alt_az = get_star_coord_list("Polaris", time_range, observer)
+    alt_az = get_star_coord_list(target, time_range, observer)
 else:
     target = input("What planetary object would you like to look at? ")
     alt_az = get_planet_coord_list(target, time_range, observer)
