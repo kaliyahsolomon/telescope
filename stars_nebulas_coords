@@ -5,12 +5,15 @@ import astropy.units as u
 from datetime import datetime
 import pytz
 
+##############
+# WORKS FOR: stars, galaxies, nebulae, and clusters
+#############
 
 # Define your observer location
 observer = Observer(longitude=-118.1489 * u.deg, latitude=34.1458 * u.deg, elevation=100 * u.m)  # Pasadena, CA
 
 # Define the target (e.g., Polaris)
-target = FixedTarget.from_name("Crab Nebula")
+target = FixedTarget.from_name("Sirius")
 
 # Define the time
 
@@ -31,3 +34,6 @@ altaz = observer.altaz(pst_time, target)
 # Access the altitude and azimuth values
 altitude = altaz.alt
 azimuth = altaz.az
+
+print(f"Altitude: {altitude}")
+print(f"Azimuth: {azimuth}")
