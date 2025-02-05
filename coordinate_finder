@@ -1,11 +1,43 @@
 # telscope pointing code
-import geocoder
+from astropy.coordinates import SkyCoord, AltAz, EarthLocation
+from astropy.time import Time
+from astroplan import Observer, FixedTarget
+import astropy.units as u
+from datetime import datetime, timedelta, timezone
 
-def get_current_location():
-    current_location = geocoder.ip("me")
-    if current_location.latlng:
-        latitude, longitude = current_location.latlng
-        address = current_location.address
-        return latitude, longitude, address
-    else:
-        return None
+
+def get_time_list():
+    # Get current UTC time and round down to the nearest 10 minutes
+    now = datetime.now(timezone.utc)
+    start_time = now
+
+    # Generate list of timestamps for the next 24 hours (144 intervals)
+    time_list = [(start_time + timedelta(minutes=10 * i)).strftime("%Y-%m-%d %H:%M") for i in range(144)]
+
+    return time_list
+
+def get_coord_list(target, time_range, observer):
+    star = SkyCoord.from_name(target)
+    observation_times = time_range
+    star_altaz =[]
+    for time in observation_times:
+        star_altaz.append(star.transform_to(AltAz(obstime=time, location=my_location)))
+    return star_altaz 
+
+my_location = EarthLocation(lat=34.1458 * u.deg, lon=118.1489 * u.deg)
+observer = Observer(location=my_location)
+time_range = get_time_list()
+target = "Polaris"
+
+star_altaz = []
+
+star_altaz = get_coord_list(target, time_range, observer)
+
+print(len(star_altaz))
+
+for coord in star_altaz:
+    print(f"Altitude: {coord.alt.degree:.2f} degrees, Azimuth: {coord.az.degree:.2f} degrees") 
+
+
+
+
