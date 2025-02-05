@@ -1,0 +1,30 @@
+from astroplan import Observer
+from astropy.coordinates import get_body
+from astropy.time import Time
+import astropy.units as u
+from datetime import datetime
+import pytz
+
+# Define observer location (Example: Los Angeles, CA)
+observer = Observer(latitude=34.0522*u.deg, longitude=-118.2437*u.deg, elevation=71*u.m)
+
+# Get current time in UTC
+utc_now = Time.now()
+
+# Convert UTC to Pacific Time (handles PST/PDT automatically)
+pacific = pytz.timezone("America/Los_Angeles")
+local_dt = utc_now.to_datetime(timezone=pytz.utc).astimezone(pacific)
+
+# Convert back to astropy Time format
+pst_time = Time(local_dt)
+
+# Get Jupiter's coordinates
+jupiter = get_body('jupiter', pst_time, observer.location)
+
+# Convert to Alt/Az
+jupiter_altaz = jupiter.transform_to(observer.altaz(pst_time))
+
+# Print Altitude and Azimuth
+print(f"Jupiter's Altitude: {jupiter_altaz.alt:.2f}")
+print(f"Jupiter's Azimuth: {jupiter_altaz.az:.2f}")
+print(f"Local Time (PST/PDT): {local_dt}")

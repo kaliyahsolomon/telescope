@@ -1,0 +1,33 @@
+from astroplan import Observer, FixedTarget
+from astropy.coordinates import SkyCoord
+from astropy.time import Time
+import astropy.units as u
+from datetime import datetime
+import pytz
+
+
+# Define your observer location
+observer = Observer(longitude=-118.1489 * u.deg, latitude=34.1458 * u.deg, elevation=100 * u.m)  # Pasadena, CA
+
+# Define the target (e.g., Polaris)
+target = FixedTarget.from_name("Crab Nebula")
+
+# Define the time
+
+# Get current time in UTC
+utc_now = Time.now()
+
+# Convert UTC to Pacific Time (handles PST/PDT automatically)
+pacific = pytz.timezone("America/Los_Angeles")
+local_dt = utc_now.to_datetime(timezone=pytz.utc).astimezone(pacific)
+
+# Convert back to astropy Time format
+pst_time = Time(local_dt)
+
+
+# Calculate altitude and azimuth
+altaz = observer.altaz(pst_time, target)
+
+# Access the altitude and azimuth values
+altitude = altaz.alt
+azimuth = altaz.az
