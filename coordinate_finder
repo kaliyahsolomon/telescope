@@ -27,7 +27,7 @@ def get_coord_list(target, time_range, observer):
 my_location = EarthLocation(lat=34.1458 * u.deg, lon=118.1489 * u.deg)
 observer = Observer(location=my_location)
 time_range = get_time_list()
-target = "Polaris"
+target = input("What star would you like to look at? ")
 
 star_altaz = []
 
