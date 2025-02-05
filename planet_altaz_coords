@@ -5,6 +5,10 @@ import astropy.units as u
 from datetime import datetime
 import pytz
 
+#############
+# WORKS FOR: planets, the moon, sun
+#############
+
 # Define observer location (Example: Los Angeles, CA)
 observer = Observer(latitude=34.0522*u.deg, longitude=-118.2437*u.deg, elevation=71*u.m)
 
@@ -19,7 +23,7 @@ local_dt = utc_now.to_datetime(timezone=pytz.utc).astimezone(pacific)
 pst_time = Time(local_dt)
 
 # Get Jupiter's coordinates
-jupiter = get_body('jupiter', pst_time, observer.location)
+jupiter = get_body('sun', pst_time, observer.location)
 
 # Convert to Alt/Az
 jupiter_altaz = jupiter.transform_to(observer.altaz(pst_time))
