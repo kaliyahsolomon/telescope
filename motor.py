@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import math
 
 # Define GPIO pins
 DIR_PIN = 24    # Direction pin
@@ -51,3 +52,20 @@ except KeyboardInterrupt:
     else:
         move_stepper(angle, "CW")
     GPIO.cleanup()
+
+l = [0, 0, 0]
+current_coord = 0.0
+
+current_coord = l[0]
+first_move()
+for i in range(1, len(l)):
+    if(Math.abs(l[i]-current_coord) > 350):
+        "keep w/ current"
+    elif(l[i]-current_coord > 0.0):
+        "keep w/ current"
+    elif(l[i]-current_coord < 0.0):
+        "change direction"
+
+
+def random(angle):
+    current_coord = angle
