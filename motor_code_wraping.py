@@ -120,11 +120,11 @@ def move_stepper(direction_az, direction_alt, angle_az, angle_alt, dir_pin_az, s
 
     print(f"Moved to angle:")
 
-def move(alt_list, az_list, current_az, current_alt, dir_pin_az, step_pin_az, dir_pin_alt, step_pin_alt):
+def move(alt_list, az_list, dir_pin_az, step_pin_az, dir_pin_alt, step_pin_alt):
     l = [3.0, 36.5, 3.3]
-    current_position_alt = alt_list[i]
-    current_position_az = az_list[i]
-    first_move(l[0], current_alt, dir_pin_az, step_pin_az, dir_pin_alt, step_pin_alt)
+    current_position_alt = alt_list[0]
+    current_position_az = az_list[0]
+    first_move(alt_list[0], az_list[0], dir_pin_az, step_pin_az, dir_pin_alt, step_pin_alt)
 
     for i in range(1, len(l)):
         wrap_angle_alt = wrap(current_position_alt-alt_list[i], 360)
