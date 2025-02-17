@@ -112,7 +112,7 @@ def move_stepper(direction_az, direction_alt, angle_az, angle_alt, dir_pin_az, s
     GPIO.output(dir_pin_az, GPIO.HIGH if direction_az == "CW" else GPIO.LOW)
     GPIO.output(dir_pin_alt, GPIO.HIGH if direction_alt == "CW" else GPIO.LOW)
 
-    for _ in range(steps_to_move):
+    for i in range(steps_to_move):
         GPIO.output(step_pin, GPIO.HIGH)
         time.sleep(step_delay)
         GPIO.output(step_pin, GPIO.LOW)
@@ -121,12 +121,11 @@ def move_stepper(direction_az, direction_alt, angle_az, angle_alt, dir_pin_az, s
     print(f"Moved to angle:")
 
 def move(alt_list, az_list, dir_pin_az, step_pin_az, dir_pin_alt, step_pin_alt):
-    l = [3.0, 36.5, 3.3]
     current_position_alt = alt_list[0]
     current_position_az = az_list[0]
     first_move(alt_list[0], az_list[0], dir_pin_az, step_pin_az, dir_pin_alt, step_pin_alt)
 
-    for i in range(1, len(l)):
+    for i in range(1, len(alt_list)):
         wrap_angle_alt = wrap(current_position_alt-alt_list[i], 360)
         wrap_angle_az = wrap(current_position_az-az_list[i], 360)
         current_position_alt = alt_list[i]
